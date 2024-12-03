@@ -11,6 +11,7 @@ export class ReportHandler {
     return safeReports;
   }
 }
+
 export class Report {
   levels: number[];
   unsafeElements = 0;
@@ -32,7 +33,7 @@ export class Report {
       combinationOk = ascOrDesc && safeReport;
 
       if (combinationOk) {
-        break; // Avbryter loopen när en giltig kombination hittas
+        break;
       }
     }
     return combinationOk;
