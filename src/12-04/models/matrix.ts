@@ -15,6 +15,8 @@ export default class Matrix {
   readonly noOfRows: number;
   readonly noOfColumns: number;
   numberOfHits = 0;
+  // readonly aIndex: number[][] = [];
+  readonly aIndex: number[][] = [];
 
   constructor(data: string[][]) {
     this.data = data;
@@ -28,7 +30,7 @@ export default class Matrix {
       for (let column = 0; column < this.noOfColumns; column++) {
         for (const [nextRow, nextColumn] of this.directions) {
           if (this.isMatch(row, column, nextRow, nextColumn, stringValue)) {
-            this.numberOfHits++;
+            this.aIndex.push([row + nextRow, column + nextColumn]);
           }
         }
       }
@@ -63,11 +65,25 @@ export default class Matrix {
     return true;
   }
 
-  findFriendMas(
-    topLeftRow: number,
-    topLeftColumn: number,
-    nextLine: number,
-    nextColumn: number,
-    searchedString: string
-  ) {}
+  countDuplicates(): number {
+    const elementCount: { [key: string]: number } = {};
+    let duplicates = 0;
+
+    for (const [row, column] of this.aIndex) {
+      const key = `${row},${column}`;
+      if (elementCount[key]) {
+        elementCount[key]++;
+      } else {
+        elementCount[key] = 1;
+      }
+    }
+
+    for (const count of Object.values(elementCount)) {
+      if (count === 2) {
+        duplicates++;
+      }
+    }
+
+    return duplicates;
+  }
 }
