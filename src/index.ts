@@ -6,7 +6,7 @@ const ruleRegexp = /\d+/g;
 const prints: number[][] = [];
 
 let totalSumCorrectPrints = 0;
-let totalSumInCorrectPrints = 0;
+let totalSumIncorrectPrints = 0;
 
 readPrints();
 readAllRules();
@@ -19,13 +19,13 @@ prints.forEach((print) => {
     const middleValue = outputOrder[Math.floor(print.length / 2)];
     totalSumCorrectPrints += middleValue;
   } else {
-    console.log(outputOrder);
     const middleValue = outputOrder[Math.floor(print.length / 2)];
-    totalSumInCorrectPrints += middleValue;
+    totalSumIncorrectPrints += middleValue;
   }
 });
 
-console.log(totalSumInCorrectPrints);
+console.log('Prints in correct order:', totalSumCorrectPrints);
+console.log('Prints in incorrect order:', totalSumIncorrectPrints);
 
 function readPrints() {
   const printsStr = fs.readFileSync('src/12-05/data/prints.txt', 'utf-8');
